@@ -9,7 +9,6 @@ const port = 3000;
 app.use(cors());
 
 const driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NEO4J_USER, process.env.NEO4J_PASSWORD));
-const session = driver.session();
 
 // Root route
 app.get('/', async (res) => {
@@ -17,7 +16,8 @@ app.get('/', async (res) => {
 });
 
 // Data route
-app.get('/data', async (req, res) => {
+app.get('/data', async (res) => {
+    const session = driver.session();
     try {
         const result = await session.run(
             'MATCH (n) RETURN n'); 
