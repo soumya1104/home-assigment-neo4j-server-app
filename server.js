@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
+app.use(express.json());
 
 const driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD));
 
