@@ -1,11 +1,15 @@
 const express = require('express'); 
 const neo4j = require('neo4j-driver');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
 const driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD));
+
+// Use CORS Middleware
+app.use(cors());
 
 // Root route
 app.get('/', async (req, res) => {
