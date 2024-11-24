@@ -1,23 +1,19 @@
 const express = require('express'); 
 const neo4j = require('neo4j-driver');
-const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
-app.use(cors());
-app.use(express.json());
-
 const driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD));
 
 // Root route
-// app.get('/', async (res) => {
-//     res.send('Welcome to the Express/js server!');
-// });
+app.get('/', async (req, res) => {
+    res.send('Welcome to the Express/js server!');
+});
 
 // Data route
-app.get('/data', async (res) => {
+app.get('/data', async (req, res) => {
     const session = driver.session();
     try {
         const result = await session.run(
