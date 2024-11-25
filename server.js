@@ -16,6 +16,11 @@ app.get('/', async (req, res) => {
     res.send('Welcome to the Express/js server!');
 });
 
+// Health check route
+app.get('/health', async (req, res) => {
+    res.status(200).send('OK');
+});
+
 // Data route
 app.get('/data', async (req, res) => {
     const session = driver.session();
